@@ -112,3 +112,18 @@ Aguarde alguns segundos e abra no navegador:
 
 O retorno adicional da etapa 3 serve para garantir a ordem: so confirmar o pagamento depois que o primeiro aviso for processado. Nenhum servico precisa fazer requisicao HTTP diretamente ao outro.
 
+## Servicos sao independentes
+
+Com tudo funcionando, execute:
+
+```powershell
+docker compose stop notificacao
+```
+
+Depois envie outro pagamento pelo Postman. Ele sera armazenado como **PENDENTE**; como o servico de notificacao esta parado, a mensagem fica na fila do RabbitMQ. Em seguida execute:
+
+```powershell
+docker compose start notificacao
+```
+
+A notificacao processa a mensagem pendente, devolve o evento de retorno e o pagamento muda para **SUCESSO**. Isso demonstra a troca de mensagens sem acoplamento direto entre os dois servicos.
