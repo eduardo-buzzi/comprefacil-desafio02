@@ -6,7 +6,7 @@ Projeto desenvolvido para a disciplina **Desenvolvimento de Sistemas Distribuido
 
 Demonstrar dois microsservicos independentes que se comunicam de maneira assincrona: um recebe os pagamentos e o outro notifica o usuario sobre o recebimento e a confirmacao.
 
-**Importante:** este projeto e uma simulacao academica. O pagamento e confirmado automaticamente apos a primeira notificacao; nao existe cobranca real, cartao ou integracao com banco.
+**OBS:** este projeto e uma simulacao academica.
 
 ## Tecnologias
 
