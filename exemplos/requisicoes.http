@@ -1,0 +1,24 @@
+### 1. Testar os servicos
+GET http://localhost:3001/health
+
+###
+GET http://localhost:3002/health
+
+### 2. Criar pagamento (aguarde a resposta HTTP 202)
+POST http://localhost:3001/pagamentos
+Content-Type: application/json
+
+{
+  "nome": "Maria Silva",
+  "email": "maria@exemplo.com",
+  "valor": 149.90
+}
+
+### 3. Listar pagamentos (o status deve virar SUCESSO)
+GET http://localhost:3001/pagamentos
+
+### 4. Ver notificacoes (uma de solicitacao e outra de confirmacao)
+GET http://localhost:3002/notificacoes
+
+### 5. Ver notificacoes de um cliente
+GET http://localhost:3002/notificacoes?email=maria@exemplo.com
