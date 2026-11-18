@@ -8,7 +8,7 @@ Demonstrar dois microsservicos independentes que se comunicam de maneira assincr
 
 **OBS:** este projeto e uma simulacao academica.
 
-## Tecnologias
+## Tecnologias Utilizadas
 
 - Node.js com Express (APIs REST)
 - PostgreSQL (dados dos pagamentos)
@@ -39,7 +39,7 @@ CompreFacil-Desafio2-DSD/
     └── requisicoes.http
 ```
 
-## Como executar (Windows)
+## Como executar
 
 **Pre-requisitos:** Docker Desktop instalado e aberto (com containers Linux). Nao e necessario instalar PostgreSQL, RabbitMQ ou Node.js separadamente para executar pelo Docker.
 
@@ -65,7 +65,7 @@ docker compose logs -f pagamento notificacao
 
 Use **Ctrl+C** para parar a visualizacao de logs. Os containers continuam funcionando.
 
-## Enderecos
+## Enderecos Utilizados
 
 | Servico | Endereco |
 | --- | --- |
