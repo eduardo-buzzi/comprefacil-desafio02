@@ -1,0 +1,68 @@
+name: comprefacil-dsd
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: comprefacil
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_DB: comprefacil
+    volumes:
+      - dados_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U comprefacil -d comprefacil"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    environment:
+      RABBITMQ_DEFAULT_USER: aluno
+      RABBITMQ_DEFAULT_PASS: aluno123
+    ports:
+      - "15672:15672"
+    volumes:
+      - dados_rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+
+  pagamento:
+    build: ./pagamento
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgres://comprefacil:senha123@postgres:5432/comprefacil
+      RABBITMQ_URL: amqp://aluno:aluno123@rabbitmq:5672
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  notificacao:
+    build: ./notificacao
+    environment:
+      PORT: 3002
+      RABBITMQ_URL: amqp://aluno:aluno123@rabbitmq:5672
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-notificacoes@comprefacil.local}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+    ports:
+      - "3002:3002"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  dados_postgres:
+  dados_rabbitmq:
