@@ -14,7 +14,6 @@ Demonstrar dois microsservicos independentes que se comunicam de maneira assincr
 - PostgreSQL (dados dos pagamentos)
 - RabbitMQ (mensagens AMQP entre os servicos)
 - Docker Compose (execucao dos quatro containers)
-- Nodemailer (envio de e-mail opcional; na configuracao padrao, os avisos ficam no console e na API)
 
 ## Estrutura de pastas
 
