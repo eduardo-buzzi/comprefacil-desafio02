@@ -1,4 +1,4 @@
-# CompreFacil - Aplicacao de Pagamento (Desafio 2 DSD)
+# Aplicacao de Pagamento (Desafio 2)
 
 Projeto desenvolvido para a disciplina **Desenvolvimento de Sistemas Distribuidos**, usando Node.js, PostgreSQL, RabbitMQ e Docker Compose.
 
